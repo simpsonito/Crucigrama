@@ -1,0 +1,157 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Crucigrama</title>	
+</head> 
+<body> 
+	<!-- 
+		here we have oygContext top DOM element to which the play area will be bound;
+		the HTML template has more binding sites for various visual parts of the puzzle: 
+		oygHeader, oygHeaderMenu, oygState, oygPuzzle, oygPuzzleFooter, oygListH, oygListV, oygFooter;
+		all element names for binding are prefixed with "oyg"
+	-->
+	<div id="oygContext" align="center" style="width:100%;">
+		<table class="oyOuterFrame" border="0" cellpadding="0" cellspacing="0">
+			<tr><td align="center">
+				<table class="oyFrame" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td colspan="5">
+							<table class="oyFrame" border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr class="oyHeader">
+									<td class="oyHeader">
+										<div id="oygHeader"></div>
+									</td>
+									<td align="right">	
+										<div id="oygHeaderMenu"></div>								
+									</td> 
+								</tr>					
+							</table>
+						</td>  
+					</tr>
+					<tr style="height: 4px;">
+						<td colspan="5"></td>
+					</tr>
+					<tr>  
+						<td rowspan="3" class="oyPuzzleCell" align="center" valign="top"> 
+							<div id="oygState"></div>
+							<div class="oyPuzzle" id="oygPuzzle"></div>
+							<div class="oyPuzzleFooter" id="oygPuzzleFooter"></div>			
+						</td>  
+						<td class="oyListCellDot">.</td>    
+						<td class="oyListCell" valign="top" id="oygListH"></td>
+					</tr>
+					<tr style="height: 4px;">
+						<td colspan="4"></td>
+					</tr>		
+					<tr>  
+						<td class="oyListCellDot">.</td>   
+						<td class="oyListCell" valign="top" id="oygListV"></td>					
+					</tr>
+					<tr style="height: 4px;">
+						<td colspan="5"></td>
+					</tr>
+                    <tr><td colspan="5" id="retroalimentacion">&nbsp;</td></tr>
+                    <tr>
+						<td colspan="5" class="oyFooter"> 
+							<div id="oygFooter"></div>
+						</td>
+					</tr>			
+				</table>
+			</td></tr>
+		</table>
+		<div id="oygStatic" align="center" style="font-size: 10px; color: #4282B5; font-family: Arial;"></div>
+	</div>  
+
+	<!-- 
+		here we include all oy-cword-1.0 CSS files; all our style class name are prefixed with "oy" 
+	-->
+	<link rel="stylesheet" href="./oy-cword-1.0/css/base.css" type="text/css">
+
+	<!-- 
+		here we include all oy-cword-1.0 JavaScript files; order is important; 
+		all the files can be combined into one file to reduce number of separate requests
+	-->
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyPrologue.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyJsrAjax.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyClue.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyMenu.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyPuzzle.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyServer.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oySign.js"></script>	
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyMisc.js"></script>	
+ 
+	<script type="text/javascript"><!--
+
+		// 
+		//	here we include our own puzzle; it has to be fully prepared with all words properly arranged on the grid;
+		//	currently only one instance of the puzzle can be embedded into the page, we may fix this in the future
+		// 
+
+		var oygCrosswordPuzzle = new oyCrosswordPuzzle (
+		  "5748185539682739085",
+		  "./oy-cword-1.0",
+		  "/a/a",
+		  "Ejercicio 3. Crucigrama de Din&aacute;mica de Suelos",
+		  "Instrucciones: Coloca el cursor en cada uno de los n&uacute;meros que aparecen en el crucigrama para que se despliegue la pregunta correspondiente. Una vez que tengas la respuesta, an&oacute;tala en las celdas ubicadas en la parte superior. Al finalizar, podr&aacute;s conocer tu desempe&ntilde;o.",
+		  [/* oyCrosswordClue(
+				len,		// length of the word in symnbols, i.e. for the word 
+						// "Abstract" this will be 8
+				clue,		// the text of the word clue given to the user, i.e. 
+						// for the word "Abstract" this will be "This factory 
+						// creates an instance of several families of classes"
+				answer,		// thw word itself, i.e. "Abstract"; maybe be ommited, 
+						// thus disabling the reveal function
+				sign,		// MD5 signature of the word itself with puzzle uid, 
+						// i.e. for the word "Abstract" and uid "5748185539682739085" 
+						// this will be "26f265b96e01081a5ef26a432eda9cff"
+				dir,		// word direction; 0 for horizontal and 1 for vertical
+				xpos,		// zero-based coordinate of the word on X axis, zero on the left, 
+						// i.e. for the word "Abstract" this will be 12
+				ypos		// zero-based coordinate of the word on Y axis, zero at the top, 
+						// i.e. for the word "Abstract" this will be 6
+			) */
+			 new oyCrosswordClue(12, "Deslizamiento cuya superficie principal de falla es m&aacute;s o menos plana.", "traslacional", "", 0, 0, 13)
+			
+			,new oyCrosswordClue(6, "Masa de tierra originada por un proceso natural que presenta una pendiente o cambios significativos de altura.", "ladera", "", 0, 1, 18)
+			,new oyCrosswordClue(10, "Deslizamiento cuya superficie principal de falla resulta curva hacia arriba.", "rotacional", "", 1, 2, 10)
+			,new oyCrosswordClue(14, "Factores relacionados con la propia naturaleza y estructura del terreno.", "condicionantes", "", 0, 8, 4)
+			,new oyCrosswordClue(13, "Origina inestabilidad y est&aacute; asociado a la ausencia de cobertura vegetal.", "deforestacion", "", 1, 9, 1)
+			,new oyCrosswordClue(13, "Factor externo que origina inestabilidad.", "precipitacion", "", 0, 14, 1)
+			,new oyCrosswordClue(9, "Factor interno que origina inestabilidad.", "pendiente", "", 0, 15, 13)
+			,new oyCrosswordClue(15, "Factores que detonan la inestabilidad.", "desencadenantes", "", 1, 16, 0)
+			,new oyCrosswordClue(7, "Sin&oacute;nimo de deslizamiento.", "deslave", "", 1, 23, 12)
+			,new oyCrosswordClue(3, "Herramienta que permite integrar y analizar informaci&oacute;n geogr&aacute;fica, permitiendo visualizar los datos obtenidos en un mapa a partir de la superposici&oacute;n de capas de informaci&oacute;n.", "SIG", "", 1, 21, 4)
+		  ],
+		  27,
+		  20
+		);//Al final se configura el tamaño de la cuadrícula
+		
+		//
+		//	here we configure puzzle options, callbacks and publisher information
+		// 
+		 
+		// publisher information
+		//oygCrosswordPuzzle.publisherName = "by Pavel Simakov";
+		//oygCrosswordPuzzle.publisherURL = "http://www.softwaresecretweapons.com";
+
+		// game exit URL
+		//oygCrosswordPuzzle.leaveGameURL = "http://www.cnn.com";  
+      
+		// this is how to turn off server support; score submission and action tracking will be disabled
+		oygCrosswordPuzzle.canTalkToServer = false;
+
+        function retroalimentar(mensaje){
+            document.getElementById("retroalimentacion").innerHTML = mensaje;
+        }
+
+
+	--></script>	
+
+	<!--
+		here we instantiate the puzzle and bind it to the HTML template above and show it to the user
+	-->
+	<script type="text/javascript" src="./oy-cword-1.0/js/oyEpilogue.js"></script>	
+
+</body>  
+
+</html>
