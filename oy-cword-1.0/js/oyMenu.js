@@ -1,29 +1,4 @@
-/*
-
-	CWORD JavaScript Crossword Engine
-
-	Copyright (C) 2007-2010 Pavel Simakov
-	http://www.softwaresecretweapons.com/jspwiki/cword
-
-	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Lesser General Public
-	License as published by the Free Software Foundation; either
-	version 2.1 of the License, or (at your option) any later version.
-
-	This library is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Lesser General Public License for more details.
-
-	You should have received a copy of the GNU Lesser General Public
-	License along with this library; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-
-*/
-
-//
 // Actions menu
-//
 function oyCrosswordMenu(puzz){
 	this.puzz = puzz;
 	
@@ -38,7 +13,6 @@ function oyCrosswordMenu(puzz){
 
 	this.currentMenu = null;
 	this.over = null;
-	
 	// cell states
 	this.cache = new Array();
 	for (var i=0; i < this.puzz.h; i++){	
@@ -125,7 +99,7 @@ oyCrosswordMenu.prototype.installWelcomeMenu = function(){
 	this.addNewLine(target);
 	
 	this.addAction( 
-		target, "Comenzar", "Iniciando...", " ",
+		target, "Inicio", "Iniciando...", " ",
 		function(){				 
 			oThis.puzz.bind();	
 			oThis.puzz.hlist.clickItem(0);			
@@ -133,11 +107,11 @@ oyCrosswordMenu.prototype.installWelcomeMenu = function(){
 			
 			document.getElementById("oygStatic").innerHTML = "";
 			
-			oThis.footer.stateOk("Disfruta el juego!");
+			oThis.footer.stateOk("<span style='display:none;'> Disfruta el juego! </span>");
 		}
 	);	
 
-	this.footer.stateOk("Listo para comenzar!");
+	this.footer.stateOk("<span style='display: none'> Haz clic en el botón para comenzar</span>");
 	 
 	this.server.trackAction(this.puzz.uid, "wlm");
 }
@@ -152,7 +126,8 @@ oyCrosswordMenu.prototype.installContextMenu = function(){
 	var vidx = this.vlist.getClueIndexForPoint(this.xpos, this.ypos);
 	
 	// reveals
-	if (!this.canReveal){
+	/*
+    if (!this.canReveal){
 		this.addNoneWordAction(target, "Deshabilitado Revelar");
 	} else {			
 		if (hidx != -1){
@@ -176,12 +151,14 @@ oyCrosswordMenu.prototype.installContextMenu = function(){
 			}	 
 		}
 	} 
-	
+	*/
 	// checks
 	if (!this.canCheck){
 		this.addNoneWordAction(target, "Deshabilitado Comprobar");
 	} else {
-		var caption = "Comprobar <b>" + (hidx + 1) + "H</b>";
+        //Comprueba una únicamente
+		/*
+        var caption = "Comprobar <b>" + (hidx + 1) + "H</b>";
 		if (hidx != -1){
 			if (!this.hlist.clues[hidx].completed()){
 				this.addCheckWordAction(
@@ -202,10 +179,10 @@ oyCrosswordMenu.prototype.installContextMenu = function(){
 				this.addAction(target, caption, "", null, null);
 			}	
 		}
-		 
+		*/
 		
 		var oThis = this;
-		this.addAction(target, "Comprobar <b>Todo</b>", "Comprobando Todo...", "checando",
+		this.addAction(target, "<b>Finalizar</b>", "Revisando todo...", "checando",
 			function(){				
 				oThis.checkAll(); 
 				oThis.invalidateMenu();		
@@ -218,7 +195,7 @@ oyCrosswordMenu.prototype.installContextMenu = function(){
 		var oThis = this;
 		this.addSubmitLeaveMenuItems(target);
 	} 
-	
+
 	// footer
 	this.footer.update(); 
 	
@@ -246,10 +223,10 @@ oyCrosswordMenu.prototype.installDoneMenu = function(){
 
 	var target = document.getElementById("oygPuzzleFooter");
 	target.innerHTML = "";
-	 
+
+    /*//Aquí es para la puntuación
 	this.addNoneWordAction(target, "Juego Terminado!");	 
-	this.addNewLine(target);	     
-	
+	this.addNewLine(target);
 	var msg = "Tienes <b>" + this.score + "</b> puntos";
 	if (this.rank != -1){
 		msg += " (rank <b>" +  this.rank + "</b>)";
@@ -258,20 +235,24 @@ oyCrosswordMenu.prototype.installDoneMenu = function(){
 	
 	this.addNoneWordAction(target, msg);	  
 	this.addNewLine(target); 
-	
+	*/
 	var oThis = this;
 	this.addSubmitLeaveMenuItems(target);
 	    
-	this.footer.stateOk("Juego Terminado!");
+	this.footer.stateOk("<span style='display: none;'>Juego Terminado!</span>");
 	 
 	this.server.trackAction(this.puzz.uid, "fin");
 	
 	this.footer.update();
+    /*
     var mensaje = "Int&eacute;ntalo de nuevo. ";
     if(this.matches == this.clues.length){
         mensaje = "Muy bien! ";
     }
     retroalimentar("<b>"+mensaje + "</b>Encontraste "+this.matches+" de "+this.clues.length+" palabras en el crucigrama.");
+    */
+
+    this.addNoneWordAction(target, this.obtenerRetroalimentacion() + "Encontraste "+this.matches+" de "+this.clues.length+" palabras en el crucigrama.");
 }
  
 oyCrosswordMenu.prototype.addSubmitLeaveMenuItems = function(target){
@@ -292,13 +273,15 @@ oyCrosswordMenu.prototype.addSubmitLeaveMenuItems = function(target){
 	}
 	
 	var oThis = this;
-	this.addAction(target, "Salir del <b>Juego</b>", "Abandonando...", "--",
+
+	this.addAction(target, "Reiniciar", "Reiniciando...", "--",
 		function(){			
 			oThis.leaveGameEarly(oThis.puzz.leaveGameURL);
-			oThis.footer.stateOk("Hecho");
+			oThis.footer.stateOk("<span style='display:none;'>Hecho</span>");
 			return false; 
 		} 
 	);
+
 }
 
 oyCrosswordMenu.prototype.leaveGameEarly = function(url){
@@ -306,21 +289,17 @@ oyCrosswordMenu.prototype.leaveGameEarly = function(url){
 
 	var canLeave = true;
 	if (this.puzz.started && !this.over){
-		canLeave = confirm("El juego esta en proceso. �Quieres dejar el juego?");
+		canLeave = confirm("¿En verdad quieres reiniciar?");
 	}	  
 	if (canLeave){ 
 		window.location.reload();
 	}
 	
-	this.footer.stateOk("Hecho");
+	this.footer.stateOk("<span style='display:none;'>Hecho</span>");
 }
 
 oyCrosswordMenu.prototype.addAction = function(target, caption, hint, track, lambda){
 	caption = caption.replace(" ", "&nbsp;");
-	
-	var elem = document.createElement("SPAN");
-	elem.innerHTML = " &nbsp; ";	
-	target.appendChild(elem);	
 
 	var elem = document.createElement("A");
 	elem.innerHTML = caption;	
@@ -349,20 +328,15 @@ oyCrosswordMenu.prototype.addAction = function(target, caption, hint, track, lam
 }
 
 oyCrosswordMenu.prototype.addNewLine = function(target){
-	var elem = document.createElement("SPAN");
-	elem.innerHTML = "<span style='font-size: 4px;'><br />&nbsp;<br /></span>";
-	target.appendChild(elem);	
+	//var elem = document.createElement("br");
+	//target.appendChild(elem);
 }
 
 oyCrosswordMenu.prototype.addNoneWordAction = function(target, caption){
 	var elem = document.createElement("SPAN");
 	elem.className = "oyMenuActionNone";
 	elem.innerHTML = caption;	
-	target.appendChild(elem);	
-	
-	var elem = document.createElement("SPAN");
-	elem.innerHTML = " ";	
-	target.appendChild(elem);		
+	target.appendChild(elem);
 }
 
 oyCrosswordMenu.prototype.addCheckWordAction = function(clue, target, caption){
@@ -378,7 +352,7 @@ oyCrosswordMenu.prototype.addCheckWordAction = function(clue, target, caption){
 
 oyCrosswordMenu.prototype.addRevealWordAction = function(clue, target, caption){
 	var oThis = this;
-	this.addAction(target, caption, "Revealando...", "rvl",
+	this.addAction(target, caption, "Revelando...", "rvl",
 		function(){				
 			oThis.revealWord(clue);			
 			oThis.invalidateMenu();		
@@ -389,7 +363,7 @@ oyCrosswordMenu.prototype.addRevealWordAction = function(clue, target, caption){
  
 oyCrosswordMenu.prototype.getCurrentValueFor = function(x, y){
 	var value = this.inputCache.getElement(x, y).value;
-	if (value == " " || value == ""){				
+	if (value == ""){//Aquí se revisaba si estaba llena o con espacio, el espacio se admite en esta versión
 		value = null;
 	}
 	
@@ -558,8 +532,10 @@ oyCrosswordMenu.prototype.checkAll = function(){
 		if (status.isComplete){
 			checked++;
 			this.checks++; 
-			this.deducts += this.getDeductionForCheck(this.clues[i]);			
-			if (status.wrong == 0){				 
+			this.deducts += this.getDeductionForCheck(this.clues[i]);
+			//Colocar <span data-palabra='texto'>___________</span> en codigoCrucigrama.js en cada pista, para poner las palabras
+            //var pistaCorrespondiente = document.body.querySelector(".oyPanelDiv span[data-palabra='" + this.clues[i].answer + "']");
+            if (status.wrong == 0){
 				this.showAnswer(this.clues[i], 1);	 	
 				this.score += this.getScoreForMatch(this.clues[i]);
 				
@@ -568,18 +544,36 @@ oyCrosswordMenu.prototype.checkAll = function(){
 				
 				correct++; 
 				this.matches++;
-			}
+                //console.log("encontrada: ", this.clues[i].answer);
+                //pistaCorrespondiente.innerHTML = this.clues[i].answer;
+                //pistaCorrespondiente.className = "bien";
+			} else {
+                //console.log("NO encontrada: ", this.clues[i].answer);
+                //pistaCorrespondiente.className = "mal";
+            }
 		} 
 	}
 		
 	if  (checked == 0){
-		this.footer.stateError("Existen palabras que no se han completado!");
+		this.footer.stateError("Por favor escribe todas las palabras para calificar");
 	} else {
-		this.footer.stateOk("Revisadas " + checked + ", " + correct + " Correctas!");
-        retroalimentar("Hasta el momento has encontrado "+this.matches+" de "+this.clues.length+" palabras en el crucigrama. Haz clic en 'revelar' si no encuentras una palabra pero ten en cuenta que se considerar&aacute; como error.");
+		//this.footer.stateOk("<span style='display: none'>Revisadas " + checked + ", " + correct + " Correctas!</span>");
+        //Retroalimentación dependiendo el número de aciertos
+        this.footer.stateOk(this.obtenerRetroalimentacion() + "Hasta el momento has encontrado "+this.matches+" de "+this.clues.length+" palabras en el crucigrama.");
 	}
-}  
-  
+};
+oyCrosswordMenu.prototype.obtenerRetroalimentacion = function(){
+    var mensaje = "";
+    if(this.matches === this.clues.length){
+        mensaje = "¡Excelente! ";
+    } else if(this.matches === this.clues.length-1){
+        mensaje = "¡Bien! ";
+    } else {
+        mensaje = "Te recomendamos repasar para obtener un mejor resultado. ";
+    }
+    //Aquí podría enviar SCORM
+    return mensaje;
+};
 oyCrosswordMenu.prototype.checkWord = function(clue){
 	var status = this.checkWordStatus(clue);	  
 	if (!status.isComplete){

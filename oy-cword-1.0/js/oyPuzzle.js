@@ -182,13 +182,13 @@ oyCrosswordPuzzle.prototype.render = function(){
 	divWidth += "px";
 	 
 	var target = document.getElementById("oygPuzzleFooter");
-	target.style.width = divWidth;
+	//target.style.width = divWidth;
 	
 	var target = document.getElementById("oygState");
-	target.style.width = divWidth; 
+	//target.style.width = divWidth;
 	
 	var target = document.getElementById("oygPuzzle");
-	target.style.width = divWidth;
+	//target.style.width = divWidth;
 	
 	target.innerHTML = buf; 	
 	

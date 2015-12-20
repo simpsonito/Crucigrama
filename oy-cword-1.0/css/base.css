@@ -1,41 +1,102 @@
-/*
+.oyPanelDiv{
+    text-align: left;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.oyPuzzleFooter{
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+div#datos{
+    float: left;
+    max-width: 500px;
+    text-align: left;
+    display: inline-block;
+}
+.oyPuzzleFooter{
+    margin: 15px 0;
+}
+.oyListNormal:nth-child(odd) {
+    background-color: rgba(255,255,255,1);
+}
+#oygState{
+    color: #000 !important;
+    font-size: 12px;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    text-align: center;
+    max-width: 320px;
+}
+.oyPuzzleFooter a{
+    display: inline-block;
+}
+.oyPanelDiv span{
+    font-weight: bold;
+}
+.oyPanelDiv span.bien{
+    background-image: url('palomita.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 16px;/* ancho de la imagen más un poco */
+    margin-left: 10px;
+}
+.oyPanelDiv span.mal{
+    background-image: url('tache.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 16px;/* ancho de la imagen más un poco */
+    margin-left: 10px;
+    opacity: 0.75;
+}
 
-	CWORD JavaScript Crossword Engine
-
-	Copyright (C) 2007-2010 Pavel Simakov
-	http://www.softwaresecretweapons.com/jspwiki/cword
-
-	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Lesser General Public
-	License as published by the Free Software Foundation; either
-	version 2.1 of the License, or (at your option) any later version.
-
-	This library is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Lesser General Public License for more details.
-
-	You should have received a copy of the GNU Lesser General Public
-	License along with this library; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-
-*/
-
-body {
-	background-color: #fff;
+.tituloOrientacion{
+    font-weight: bold;
+    text-align: center;
+    background-color: #fff;
+}
+.instrucciones{
+    font-size: 12px;
+    margin: 10px;
+}
+@media screen and (max-width: 900px) {
+    div#datos{
+        float: none;
+        max-width: inherit;
+    }
+    #oygListH{
+        width: 49%;
+        float: left;
+    }
+    #oygListV{
+        width: 49%;
+        float: right;
+    }
+}
+@media screen and (max-width: 515px) {
+    #oygListH{
+        width: 100%;
+        float: none;
+    }
+    #oygListV{
+        width: 100%;
+        float: none;
+    }
+}
+div#oygContext{
+    display: inline-block;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+}
+body{
+    text-align: center;
 }
 .oyPuzzleCell {	
 	background-color: #FFFFFF;
 } 
 .oyPuzzle {
-	padding: 8px;
+	/*padding: 8px;*/
 	border-collapse: collapse;	
-} 				
-.oyPuzzleFooter{
-	padding: 8px; 
-	font-family: "Times New Roman", Times, serif;
-	text-align: center;		
-	line-height: 1.4;
 }
 .ousStateOk {
 	text-align: left;		
@@ -77,7 +138,9 @@ body {
 	font-size: 70%;
 }
 .oyFrame {
-	border-collapse: collapse;		
+	border-collapse: collapse;
+    /*float:left;*/
+    display: inline-block;
 }	
 .oyCopyright{
 	padding-top: 4px;
@@ -87,11 +150,11 @@ body {
 	padding: 12px;
 	background-color: #FFFFFF;
 	border:2px #EAEAEA; border-style:solid;
--moz-border-radius: 10px 0px 10px 0px; 
--webkit-border-radius: 10px 0px 10px 0px;       
--o-border-radius: 10px 0px 10px 0px;      
- border-radius: 10px 0px 10px 0px; ; margin-top:30px;
-
+    -moz-border-radius: 10px 0px 10px 0px;
+    -webkit-border-radius: 10px 0px 10px 0px;
+    -o-border-radius: 10px 0px 10px 0px;
+    border-radius: 10px 0px 10px 0px;
+    margin-top:30px;
 }
 A.oysTextLink{
 	color: #4282B5;
@@ -102,12 +165,13 @@ A.oysTextLink:hover{
 	text-decoration: underline;
 }
 .oyMenuAction {		
-	padding-left: 4px;
-	padding-right: 4px;
+	padding: 8px;
 	color: #000000; 
-	background-color: #FFC027;
+	background-color: #dae5ff;
 	font-size: medium;
-	border: solid 1px #808080;	
+	border: solid 1px #b5b5b5;
+    border-radius: 4px;
+    box-shadow: rgba(0,0,0,0.5) 5px 5px 5px;
 } 
 .oyMenuActionDis {		
 	padding-left: 4px;
@@ -118,10 +182,11 @@ A.oysTextLink:hover{
 	border: solid 1px #808080;	
 } 	
 .oyMenuActionNone{
-	padding-left: 4px;
-	padding-right: 4px; 
 	color: #000000; 
-	font-size: medium;
+	font-size: 14px;
+    padding: 10px;
+    /*max-width: 320px;*/
+    display: block;
 }
 A.oyMenuAction {
 	text-decoration: none;
@@ -140,20 +205,17 @@ A.oyMenuAction:hover {
 	color: #F9F9F9;	
 }
 .oyPanelDiv {
-	font-family:"Times New Roman", Times, serif;				
 	background-color: #F7F7FF;
-	padding: 4px;
-	text-align: center;
-	font-weight: bold;
+	padding: 1px;
 }	
 .oyPanelDivHidden {
 	width: 2px;
 	background-color: #FFFFFF;
 }	
 .oyList {
-	cursor: pointer; cursor: hand;
+	cursor: pointer;
 	font-size: 90%;
-	width: 100%;		
+	/*width: 100%;*/
 } 	
 .oyListSpacer{
 	background-color: #E0E0E0;
@@ -162,7 +224,11 @@ A.oyMenuAction:hover {
 .oyListNormal {
 	padding: 2px;
 	color: #737573;
-}	 
+}
+.oyListNormal:hover {
+    color: #050505;
+    background-color: #f8ffc6;
+}
 .oyListSel {
 	padding: 2px;
 	color: #000000;
@@ -172,85 +238,85 @@ A.oyMenuAction:hover {
 	border: none;	
 	background-color: transparent;
 	
-	font-size: 18px;
-	font-family: Courier New; 				
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
-}	 	 	
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
 .oyCellEmpty {
-	/*border: solid 1px #f6f6f6;*/	
+	/*border: solid 1px #f6f6f6;*/
 	background-color: #F7F7FF;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;		
-	
-	width: 23px;
-	height: 23px;
-}	
-.oyCellFull{ 
-	border: solid 1px #003366;	
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
+.oyCellFull{
+	border: solid 1px #003366;
 	background-color: #FFFFFF;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
-}		
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
 .oyCellRevealed {
-	border: solid 1px #003366;	
+	border: solid 1px #003366;
 	background-color: #FFC0C0;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
-}		
-.oyCellGuessed {  
-	border: solid 1px #003366;	
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
+.oyCellGuessed {
+	border: solid 1px #003366;
 	background-color: #C0FFC0;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
-}	 
-.oyCellFocused {  
-	border: solid 1px #003366;	
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
+.oyCellFocused {
+	border: solid 1px #003366;
 	background-color: #FFFFBB;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
-}	 	
-.oyCellActive {  
-	border: solid 1px #003366;	
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
+}
+.oyCellActive {
+	border: solid 1px #003366;
 	background-color: #6699FF;
-	
-	font-size: 18px;
-	font-family: Courier New; 				
+
+	font-size: 12px;
+	font-family: Courier New, monospace;
 	font-weight: bold;
-	text-align: center;				
-	
-	width: 23px; 
-	height: 23px;
+	text-align: center;
+
+	width: 16px;
+	height: 16px;
 }
 #retroalimentacion{
     font-family: Helvetica, Arial, sans-serif;

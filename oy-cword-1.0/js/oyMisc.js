@@ -44,19 +44,19 @@ oyCrosswordFooter.prototype.unbind = function(){
 
 oyCrosswordFooter.prototype.stateOk = function(text){
 	var target = document.getElementById("oygState");
-	target.innerHTML = "<b>&gt;</b> " + text + "&nbsp;";
+	target.innerHTML = "" + text + "";
 	target.className = "ousStateOk";
 }
 
 oyCrosswordFooter.prototype.stateBusy = function(text){
 	var target = document.getElementById("oygState");
-	target.innerHTML = "<b>&gt;</b> " + text + "&nbsp;";
+	target.innerHTML = "" + text + "";
 	target.className = "ousStateBusy";
 }
 
 oyCrosswordFooter.prototype.stateError = function(text){
 	var target = document.getElementById("oygState");
-	target.innerHTML = "<b>&gt;</b> " + text + "&nbsp;";
+	target.innerHTML = "" + text + "";
 	target.className = "ousStateError";
 }
 
@@ -276,7 +276,7 @@ function oygBind(puzz){
 		var msg =  
 			"Su actual navegador no es ideal para accesar a este sitio.\n" + 
 			"Soportamos IE 6.0+, Firefox 1.0+, Netscape6.0+ versions.\n\n" +
-			"A\xFAn podr\xEDa funcionar bien, ¿quieres probar?";
+			"A\xFAn podr\xEDa funcionar bien, ï¿½quieres probar?";
 		if (confirm(msg)){  
 			isSupported = true;
 		}

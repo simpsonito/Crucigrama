@@ -64,17 +64,10 @@ function oyClueList(puzz, name, clues, ns){
 }
 
 oyClueList.prototype.render = function(){
-	var buf = this.name;
-	buf += "<table class='oyList' border='0' cellspacing='0' cellpadding='0'>";
-	
-	for (var i=0; i < this.clues.length; i++){	
-		if (i != 0){
-			buf += "<tr class='oyListSpacer'><td></td></tr>";
-		} 
-		buf += "<tr><td class='oyListNormal' id='" + this.ns + i + "'><b>" + (i + 1) + ".</b> " + this.clues[i].clue + "</td></tr>";		
-	}	  
-	buf += "</table>";
-
+	var buf = "<div class='tituloOrientacion'>" + this.name + "</div>";
+	for (var i=0; i < this.clues.length; i++){
+		buf += "<div class='oyListNormal' id='" + this.ns + i + "'><b>" + (i + 1) + ".</b> " + this.clues[i].clue + "</div>";
+	}
 	return buf; 
 }
 
