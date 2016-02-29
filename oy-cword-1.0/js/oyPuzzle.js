@@ -248,7 +248,7 @@ oyCrosswordPuzzle.prototype.fillIn = function(cell, x, y, i, idx, dir){
 	if (i == 0){    
 		cell.style.backgroundImage = "url(\"" + this.appHome + "/img/" + (idx + 1) + ".gif\")"; 
 	}     
-	cell.innerHTML = "<input id='oyInput" + x + "_" + y + "' class='oyCellInput' autocomplete='off' type='text' size='1' maxlength='1' value=''>";	
+	cell.innerHTML = "<input autofocus id='oyInput" + x + "_" + y + "' class='oyCellInput' autocomplete='off' type='text' size='1' maxlength='1' value=''>";	
 }
 
 oyCrosswordPuzzle.prototype.bind = function(){	
